@@ -1,7 +1,7 @@
 <?php
 require_once '../../vendor/autoload.php';
 
-use Entidades\Usuario;
+use Models\Usuario;
 
 header('Content-Type: application/json');
 // Handle HTTP methods

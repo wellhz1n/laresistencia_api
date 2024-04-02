@@ -1,29 +1,20 @@
 <?php
 require_once '../../vendor/autoload.php';
+use Controllers\Product\ProductController;
+use Utils\api\Server\Server;
 
-use Entidades\Produto;
-
-header('Content-Type: application/json');
-// Handle HTTP methods
-$method = $_SERVER['REQUEST_METHOD'];
-$produtos = [
-    new Produto(1, "Lava Prato"),
-    new Produto(2, "Lava Carro"),
-    new Produto(3, "Lava Ar"),
-];
-
-switch ($method) {
-    case 'GET':
-        // Read operation (fetch books)
-        // $stmt = $pdo->query('SELECT * FROM books');
-        // $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (isset ($_GET['id'])) {
-            $result = array_filter($produtos, function ($v) {
-                return $v->id == $_GET['id'];
-            });
-
-            echo json_encode(count($result) > 0 ? array_shift($result) : "");
-        } else
-            echo json_encode($produtos);
-        break;
-}
+$server = new Server(new ProductController());
+$server
+    ->get(function (Server $s) {
+        $s->controller->get();
+    })
+    ->post(function (Server $s) {
+        echo "post";
+    })
+    ->put(function (Server $s) {
+        echo "put";
+    })
+    ->delete(function (Server $s) {
+        echo "delete";
+    })
+    ->start();

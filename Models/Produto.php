@@ -1,5 +1,5 @@
 <?php
-namespace Entidades {
+namespace Models {
 
     class Produto
     {

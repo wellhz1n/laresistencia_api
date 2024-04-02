@@ -2,7 +2,10 @@
   "require": {},
   "autoload": {
     "psr-4": {
-      "Entidades\\": "entidades"
+      "Models\\": "Models",
+      "Controllers\\": "Controllers",
+      "Utils\\": "Utils",
+      "Interfaces\\": "Interfaces"
     }
   }
 }
