@@ -1,6 +1,10 @@
 <?php
 namespace Utils\api\Server;
 
+require_once '../../vendor/autoload.php';
+
+use Error;
+use Throwable;
 
 class Server
 {
@@ -41,14 +45,20 @@ class Server
 
     public function start()
     {
-        if ($this->method == "GET" && $this->getMethod != null)
-            call_user_func($this->getMethod, $this);
-        else if ($this->method == "POST" && $this->postMethod != null)
-            call_user_func($this->postMethod, $this);
-        else if ($this->method == "PUT" && $this->putMethod != null)
-            call_user_func($this->putMethod, $this);
-        else if ($this->method == "delete" && $this->deleteMethod != null)
-            call_user_func($this->deleteMethod, $this);
+        try {
+
+            if ($this->method == "GET" && $this->getMethod != null)
+                call_user_func($this->getMethod, $this);
+            else if ($this->method == "POST" && $this->postMethod != null)
+                call_user_func($this->postMethod, $this);
+            else if ($this->method == "PUT" && $this->putMethod != null)
+                call_user_func($this->putMethod, $this);
+            else if ($this->method == "delete" && $this->deleteMethod != null)
+                call_user_func($this->deleteMethod, $this);
+        } catch (Throwable $th) {
+            http_response_code(401);
+            echo json_encode(new Error("Error", $th->getMessage()));
+        }
     }
 
 

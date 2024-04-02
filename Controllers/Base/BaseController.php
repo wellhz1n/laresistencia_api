@@ -2,6 +2,7 @@
 namespace Controllers\Base;
 
 require_once '../../vendor/autoload.php';
+use Exception;
 
 class BaseController
 {
@@ -15,6 +16,6 @@ class BaseController
         $headers = getallheaders();
         if (in_array('Authorization', $headers))
             return true;
-        return false;
+        throw new Exception("Usuário sem autorização ou invalido, por favor verifique!", 1);
     }
 }

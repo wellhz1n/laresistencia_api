@@ -93,6 +93,7 @@ class ProductController extends BaseController implements IController
 
     public function get()
     {
+        // $this->useAuth();
         if (isset($_GET['id']))
             $this->getProduct($_GET['id']);
         else
