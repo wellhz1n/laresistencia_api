@@ -5,6 +5,7 @@ require_once '../../vendor/autoload.php';
 
 use Error;
 use Throwable;
+use Utils\api\Errors\BaseError;
 
 class Server
 {
@@ -57,7 +58,7 @@ class Server
                 call_user_func($this->deleteMethod, $this);
         } catch (Throwable $th) {
             http_response_code(401);
-            echo json_encode(new Error("Error", $th->getMessage()));
+            echo json_encode(new BaseError("Error", $th->getMessage()));
         }
     }
 
